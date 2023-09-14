@@ -8,14 +8,16 @@ import LatestNews from '../../components/LatestNews/LatestNews';
 import NewsByFilters from '../../components/NewsByFilters/NewsByFilters';
 
 const Main = () => {
-  const { filters, changeFilter } = useFilters({
-    page_number: 1,
-    page_size: PAGE_SIZE,
-    category: null,
-    keywords: '',
-  });
+  const [news, setNews] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [keywords, setKeywords] = useState('');
+  const totalPages = 10;
+  const pageSize = 10;
 
-  const debouncedKeywords = useDebounce(filters.keywords, 1500);
+  const debouncedKeywords = useDebounce(keywords, 1500);
 
   const { data, isLoading } = useFetch(getNews, {
     ...filters,
