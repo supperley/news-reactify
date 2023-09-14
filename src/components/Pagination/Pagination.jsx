@@ -13,7 +13,6 @@ const Pagination = ({
         {'<'}
       </button>
       <div className={styles.list}>
-        {console.log('rerender')}
         {[...Array(totalPages)].map((_, index) => {
           return (
             <button
