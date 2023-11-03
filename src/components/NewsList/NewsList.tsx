@@ -1,17 +1,22 @@
 import withSkeleton from '../../helpers/hocs/withSkeleton';
+import { INews } from '../../interfaces';
 import NewsItem from '../NewsItem/NewsItem';
 import styles from './styles.module.css';
 
-const NewsList = ({ news }) => {
+interface Props {
+  news?: INews[];
+}
+
+const NewsList = ({ news }: Props) => {
   return (
     <ul className={styles.list}>
-      {news.map((item) => {
+      {news?.map((item) => {
         return <NewsItem key={item.id} item={item} />;
       })}
     </ul>
   );
 };
 
-const NewsListWithSkeleton = withSkeleton(NewsList, 'banner', 1);
+const NewsListWithSkeleton = withSkeleton<Props>(NewsList, 'banner', 1);
 
 export default NewsListWithSkeleton;

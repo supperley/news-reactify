@@ -4,9 +4,14 @@ import Search from '../../components/Search/Search';
 import { useFetch } from '../../helpers/hooks/useFetch';
 import { getCategories } from '../../api/apiNews';
 import Slider from '../Slider/Slider';
+import { CategoriesApiResponse, IFilters } from '../../interfaces';
 
-const NewsFilters = ({ filters, changeFilter }) => {
-  const { data: dataCategories } = useFetch(getCategories, {});
+interface Props {
+  filters: IFilters, changeFilter: (key: string, value: string | number | null) => void 
+}
+
+const NewsFilters = ({ filters, changeFilter }: Props) => {
+  const { data: dataCategories } = useFetch<CategoriesApiResponse, null>(getCategories);
 
   return (
     <div className={styles.filters}>
